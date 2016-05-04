@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>easypay</title>
+</head>
+<style>
+ul
+{
+	list-style:none;
+}
+li
+{
+	float:left;
+	padding:4px;
+	width:25%;
+	margin-left:25px;
+}
+.hd {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 42px;
+	color: #FFF;
+	padding: 15px;
+	font-style: italic;
+}
+.opt {
+	background-image: url(v23.png);
+	padding: 15px;
+	margin-top: 25px;
+	margin-left: 10px;
+	margin-right: 10px;
+	color: #FFF;
+	border-radius: 8px;
+	height: 125px;
+}
+.cap
+{
+	font-size:24px;
+	font-weight:bold;
+	padding:4px;
+	font-weight:bold;
+}
+.cp
+{
+	font-size:18px;
+	padding:4px;
+	margin-top:-4px;}
+.box
+{
+	text-align: center;
+	padding: 25px;
+	margin-top: 265px;
+}
+.bt
+{
+	text-align:center;
+	color:#666;
+	font-size:18px;
+	font-weight:bold;
+	padding-bottom:7px;
+	padding-top:7px;
+	padding-left:15px;
+	padding-right:15px;
+	border-radius:7px;
+	background-color:#EEE;
+	text-decoration:none;
+	margin-right:25px;}
+#win
+{
+	z-index:999;
+	margin-top:150px;
+	border: 1px solid #999;
+	padding: 4px;
+	background-color:#FFF;
+	height:550px;
+	border-radius: 12px;
+	-moz-box-shadow: 5px 5px 7px #999;
+	-webkit-box-shadow: 5px 5px 7px #999;
+	box-shadow: 5px 5px 7px #999;
+
+}
+#win span
+{
+	display: block;
+	font-size: 24px;
+	color: #666;
+	border-bottom: 1px solid #CCC;
+	margin: 4px;
+	padding-top: 15px;
+	padding-bottom: 4px;
+	padding-left: 4px;
+}
+.inpn
+{
+	padding:5px;
+	color:#666;
+	font-size:18px;
+}
+.in
+{
+	padding:7px;
+	border:1px solid #09F;
+	color:#666;
+	width:250px;
+	font-size:18px;
+	border-radius:6px;
+	-moz-box-shadow: 5px 5px 5px #999;
+	-webkit-box-shadow: 5px 5px 5px #999;
+	box-shadow: 5px 5px 5px #999;}
+p
+{
+	display:block;}
+.a
+{
+	font-size: 12px;
+	color: #06C;
+	text-decoration: none;
+	display: block;
+	margin-top:5px;
+	width: 225px;
+}
+.ct
+{
+	color:#666;
+	font-size:18px;}
+#whole
+{
+	position:absolute;
+	width:100%;
+	font-family: "Times New Roman", Times, serif;
+	left: 0px;
+	background-color:#FFF;
+	top: 0px;
+}
+#page
+{
+	border-left: 1px #666 solid;
+	border-right: 1px #666 solid;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	margin: -1px;
+	width:1000px;
+	background-image:url(vb.jpg);
+	height:900px;
+}
+#err
+{
+	margin-top:25px;
+	background-color:#F00;
+	padding:8px;
+	display:none;
+	color:#FFF;
+	font-weight:bold;}
+</style>
+<script type="text/javascript">
+function bc()
+{
+	window.location = "index.html"	
+}
+function sn()
+{
+	document.getElementById('err').style.display="block";
+	var n=document.getElementById('name').value;
+	var a=document.getElementById('address').value;
+	var e=document.getElementById('email').value;
+	var p=document.getElementById('pass').value;
+	
+	document.getElementById('err').innerHTML="";
+	if(n.length>0)
+	{
+	if(a.length>0)
+	{
+	if(e.length>0)
+	{
+			if(p.length>7 && p.length<16)
+	{
+			
+			
+			
+			document.getElementById('err').innerHTML="Registering...";
+			document.getElementById('err').style.backgroundColor="#09c";
+			var xmlhttp;
+			if (window.XMLHttpRequest)
+			{// code for IE7+, Firefox, Chrome, Opera, Safari
+  				xmlhttp=new XMLHttpRequest();
+  			}
+			else
+			{// code for IE6, IE5
+  				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  			}
+			xmlhttp.onreadystatechange=function()
+  			{
+  				if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    			{
+					if(xmlhttp.responseText=="true")
+					{
+    					document.getElementById('err').innerHTML="Admin Added to system";
+					}
+					else
+					{
+						document.getElementById('err').innerHTML=xmlhttp.responseText;
+						document.getElementById('err').style.backgroundColor="#F00";	
+					}
+					
+    			}
+  			}
+			xmlhttp.open("POST","process2.php?names="+n+"&addresss="+a+"&emails2="+e+"&passs2="+p,true);
+			xmlhttp.send();
+	}
+	else
+	{
+		document.getElementById('err').innerHTML="Invalid Password";	
+		document.getElementById('pass').focus();
+	}
+	}
+	else
+	{
+		document.getElementById('err').innerHTML="Invalid Username";	
+		document.getElementById('email').focus();
+	}
+	}
+	else
+	{
+		document.getElementById('err').innerHTML="Invalid Division";	
+		document.getElementById('address').focus();
+	}
+	}
+	else
+	{
+		document.getElementById('err').innerHTML="Invalid Name";	
+		document.getElementById('name').focus();
+	}
+}function out()
+{
+    					window.location = "index.html"
+			
+}
+</script>
+<body><div id="whole" align="center"><div id="page" align="left">
+<div class="hd">easypay<span style="margin-left:65%"><input type="button" class="bt" style="width:125px;" value=" Sign Out " onclick="out()"></span></div>
+<div class="opt"><div><ul><li style="width:100%;">
+  <div class="cap">Welcome to Super Admin Account</div>
+  <div class="cp"></div></li></ul></div>
+ <div id="win"><div class='box2'>
+   <div><span>Add Admin to the System </span>
+     <p class='inpn'><ul>
+       <li class='ct'>Name</li><li style='margin-top:-5px;margin-left:-25px;'><input type='text' id='name' class='in' /></li></ul></p><br><p class='inpn'><ul>
+         <li class='ct'>Division</li><li style='margin-top:-5px;margin-left:-25px;'><input type='text' id='address' class='in' /></li></ul></p><br /><p class='inpn'><ul><li class='ct'>Email</li><li style='margin-top:-5px;margin-left:-25px;'><input type='email' id='email' class='in' /></li></ul></p><br><p class='inpn'><ul><li class='ct'>Password</li><li style='margin-top:-5px;margin-left:-25px;'><input type='password' id='pass' class='in' /></li></ul></p><br><p style='margin-top:40px; '><ul><li><input type='submit' class='bt' value='    Add Admin     ' onclick='sn()' style='font-size:14px;  margin-top:10px; text-align:center; width:225px;margin-left:125px;' /></li></ul></p></div></div></div>
+ <div id="err">Content for New Div Tag Goes Here</div>
+</div></div>
+</body>
+</html>

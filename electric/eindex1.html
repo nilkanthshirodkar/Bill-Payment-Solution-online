@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>easypay</title>
+</head>
+<style>
+ul
+{
+	list-style:none;
+}
+li
+{
+	float:left;
+	padding:4px;
+	width:25%;
+	margin-left:25px;
+}
+.hd {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: 42px;
+	color: #FFF;
+	padding: 15px;
+	font-style: italic;
+}
+.opt {
+	background-image: url(v23.png);
+	padding: 15px;
+	margin-top: 25px;
+	margin-left:10px;
+	margin-right:10px;
+	color: #FFF;
+	border-radius: 8px;
+	height: 425px;
+}
+.cap
+{
+	font-size:24px;
+	font-weight:bold;
+	padding:4px;
+	font-weight:bold;
+}
+.cp
+{
+	font-size:18px;
+	padding:4px;
+	margin-top:-4px;}
+.box
+{
+	text-align: center;
+	padding: 25px;
+	margin-top: 265px;
+}
+.bt
+{
+	text-align:center;
+	color:#666;
+	font-size:18px;
+	font-weight:bold;
+	padding-bottom:7px;
+	padding-top:7px;
+	padding-left:15px;
+	padding-right:15px;
+	border-radius:7px;
+	background-color:#EEE;
+	text-decoration:none;
+	margin-right:25px;}
+#win
+{
+	position:fixed;
+	top:150px;
+	left:35%;
+	z-index:999;
+	width: 500px;
+	border: 1px solid #999;
+	padding: 4px;
+	background-color:#FFF;
+	height: 285px;
+	border-radius: 12px;
+	-moz-box-shadow: 5px 5px 7px #999;
+	-webkit-box-shadow: 5px 5px 7px #999;
+	box-shadow: 5px 5px 7px #999;
+	display:none;
+
+}
+#win span
+{
+	display: block;
+	font-size: 24px;
+	color: #666;
+	border-bottom: 1px solid #CCC;
+	margin: 4px;
+	padding-top: 15px;
+	padding-bottom: 4px;
+	padding-left: 4px;
+}
+.inpn
+{
+	padding:5px;
+	color:#666;
+	font-size:18px;
+}
+.in
+{
+	padding:7px;
+	border:1px solid #09F;
+	color:#666;
+	width:250px;
+	font-size:18px;
+	border-radius:6px;
+	-moz-box-shadow: 5px 5px 5px #999;
+	-webkit-box-shadow: 5px 5px 5px #999;
+	box-shadow: 5px 5px 5px #999;}
+p
+{
+	display:block;}
+.a
+{
+	font-size: 12px;
+	color: #06C;
+	text-decoration: none;
+	display: block;
+	margin-top:5px;
+	width: 225px;
+}
+.ct
+{
+	color:#666;
+	font-size:18px;}
+#whole
+{
+	position:absolute;
+	width:100%;
+	font-family: "Times New Roman", Times, serif;
+	left: 0px;
+	background-color:#FFF;
+	top: 0px;
+}
+#page
+{
+	border-left: 1px #666 solid;
+	border-right: 1px #666 solid;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	margin: -1px;
+background-image:url(vb.jpg);
+width:1000px;
+	height:650px;
+}
+#err
+{
+	margin-top:25px;
+	background-color:#F00;
+	padding:8px;
+	display:none;
+	color:#FFF;
+	font-weight:bold;}
+</style>
+<script type="text/javascript">
+function reg()
+{
+	window.location = "reg.html"	
+}
+function login()
+{
+	document.getElementById('win').style.display="block";
+	document.getElementById('win').innerHTML="<div class='box2'><div><span>Sign in to easypay</span><p class='inpn'><ul><li class='ct'>Email</li><li style='margin-top:-5px;margin-left:-25px;'><input type='email' id='email' class='in' /></li></ul></p><br><p class='inpn'><ul><li class='ct'>Password</li><li style='margin-top:-5px;margin-left:-25px;'><input type='password' id='pass' class='in' /><br /><a href='#' class='a'>Forgot your password</a></li></ul></p><br><p style='margin-top:40px; '><ul><li><input type='submit' class='bt' value='  Sign in  ' onclick='sn()' style='font-size:14px;  margin-top:10px; text-align:center; width:125px;margin-left:-250px;' /><input type='button' class='bt' value='   Close   ' style='font-size:14px;  margin-top:10px; text-align:center; width:125px;' onclick='cls()' /></li></ul></p></div></div>"
+
+}
+function cls()
+{
+	document.getElementById('win').style.display="none";
+	document.getElementById('win').innerHTML=""
+
+}
+function sn()
+{
+	document.getElementById('err').style.display="block";
+	var e=document.getElementById('email').value;
+	var p=document.getElementById('pass').value;
+	document.getElementById('err').innerHTML="";
+	if(e.lastIndexOf('@')>3 && e.lastIndexOf('@')<e.lastIndexOf('.')-1 && e.lastIndexOf(' ')==-1)
+	{
+		if(p.length>=8 && p.length<16)
+		{
+			document.getElementById('err').innerHTML="Verifying login...";
+			document.getElementById('err').style.backgroundColor="#09c";
+			var xmlhttp;
+			if (window.XMLHttpRequest)
+			{// code for IE7+, Firefox, Chrome, Opera, Safari
+  				xmlhttp=new XMLHttpRequest();
+  			}
+			else
+			{// code for IE6, IE5
+  				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  			}
+			xmlhttp.onreadystatechange=function()
+  			{
+  				if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    			{
+					if(xmlhttp.responseText=="true")
+					{
+    					window.location = "home.html";
+					}
+					else
+					{
+						document.getElementById('err').innerHTML="Login Failed";
+						document.getElementById('err').style.backgroundColor="#F00";	
+					}
+					
+    			}
+  			}
+			xmlhttp.open("GET","process.php?email="+e+"&pass="+p,true);
+			xmlhttp.send();
+		}	
+		else
+		{
+			document.getElementById('err').innerHTML="Password should be between 8 and 16";	
+			document.getElementById('pass').focus();
+		}
+	}
+	else
+	{
+		document.getElementById('err').innerHTML="Invalid email syntax";	
+		document.getElementById('email').focus();
+	}
+}
+</script>
+<body><div id="whole" align="center"><div id="page" align="left">
+<div class="hd">softpay</div>
+<div class="opt"><div><ul><li>
+<p><strong><h3>LOG IN AS:</h3></strong>
+<br>
+<div>
+<table align="center"cellspacing="30" cellpadding="0">
+<tr>
+<td width="169" align="left">
+&nbsp;
+<img src="1 (7).jpg" width="90%" height="100%" ><form method="link" action="http://localhost/softpay/electric/index.html"> <input type="submit" style="width:160px; height:35px" class="bt" value="SUPER ADMIN"/></form>
+</td>
+
+
+<td width="171" align="center">
+<img src="1 (10).jpg" width="120%" height="100%"><form method="link" action="http://localhost/softpay/electric/index.html"><input type="submit" align="center" width="80" class="bt" value="ADMIN"/></form>
+</td>
+<td width="171" align="right">
+<img src="1 (9).jpg" width="90%" height="100%"><form method="link" action="http://localhost/softpay/electric/index.html"><input type="submit" class="bt" value="SUB ADMIN"/></form>
+
+</td>
+
+
+</tr>
+</table>
+</div>
+</div>
+ 
+ <div id="win"></div>
+ <div id="err">Content for New Div Tag Goes Here</div>
+</div></div>
+</body>
+</html>
